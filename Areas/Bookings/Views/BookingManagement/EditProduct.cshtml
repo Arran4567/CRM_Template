@@ -1,0 +1,60 @@
+﻿@using Bicks.Models
+@model Bicks.Areas.ProductManagement.ViewModels.ProductViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+    ViewData["Heading"] = "Edit Product";
+}
+
+@section Toolbar {
+    <li class="nav-item toolbar-item">
+        <a href="javascript:submitForm()">
+            <i class="fa fa-check"></i>
+            <p class="">Edit Product</p>
+        </a>
+    </li>
+    <li class="nav-item toolbar-item">
+        <a asp-area="ProductManagement" asp-controller="ProductManagement" asp-action="ProductList">
+            <i class="fa fa-times"></i>
+            <p class="">Cancel</p>
+        </a>
+    </li>
+}
+
+@section Scripts {
+    <script type="text/javascript">
+        function submitForm() {
+            $('#edit-product-form').submit();
+        }
+    </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" id="edit-product-form">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Product.ID" />
+            <div class="form-group">
+                <label asp-for="Product.Name" class="control-label"></label>
+                <input asp-for="Product.Name" class="form-control" />
+                <span asp-validation-for="Product.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.PricePerKg" class="control-label"></label>
+                <input asp-for="Product.PricePerKg" class="form-control" />
+                <span asp-validation-for="Product.PricePerKg" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.Category" class="control-label"></label>
+                <select id="CompanyType" asp-for="Product.Category.ID">
+                    @foreach (Category category in Model.Categories)
+                    {
+                        <option value="@category.ID">@category.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="Product.Category" class="text-danger"></span>
+            </div>
+        </form>
+    </div>
+</div>

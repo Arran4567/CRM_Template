@@ -1,0 +1,45 @@
+﻿@{
+    ViewData["Title"] = "Product Management";
+    ViewData["Heading"] = "Product Management";
+}
+<div class="card-grid">
+    <a class="card" asp-area="ProductManagement" asp-controller="ProductManagement" asp-action="ProductList">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="" class="img-fluid rounded-start" alt="" />
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">Product List</h5>
+                    <p class="card-text">List of all products</p>
+                </div>
+            </div>
+        </div>
+    </a>
+    <a class="card" asp-area="ProductManagement" asp-controller="ProductManagement" asp-action="EditStock">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="" class="img-fluid rounded-start" alt="" />
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">Edit Stock</h5>
+                    <p class="card-text">Edit stock of any item</p>
+                </div>
+            </div>
+        </div>
+    </a>
+    <a class="card" asp-area="ProductManagement" asp-controller="ProductManagement" asp-action="CategoryList">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="" class="img-fluid rounded-start" alt="" />
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">Category List</h5>
+                    <p class="card-text">List of all category</p>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>

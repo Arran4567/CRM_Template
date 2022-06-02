@@ -22,6 +22,7 @@ namespace Bicks.Data
             // Link DB Table to Model
             modelBuilder.Entity<Client>().ToTable("Clients");
             modelBuilder.Entity<Product>().ToTable("Products");
+            modelBuilder.Entity<Bookings>().ToTable("Bookings");
             modelBuilder.Entity<Category>().ToTable("Categories");
             modelBuilder.Entity<Sale>().ToTable("Sales");
             modelBuilder.Entity<InvoiceItem>().ToTable("InvoiceItems");

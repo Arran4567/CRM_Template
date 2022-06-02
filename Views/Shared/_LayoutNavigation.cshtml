@@ -43,33 +43,15 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a asp-area="Bookings" asp-controller="Bookings" asp-action="Index" class="navbar-item nav-link" aria-content="page" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Calendar">
+                                    <i class="fa fa-calendar"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a asp-area="Invoicing" asp-controller="Invoicing" asp-action="Index" class="navbar-item nav-link" aria-content="page" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Invoicing">
                                     <i class="fa fa-money-check-alt"></i>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a asp-area="ProductManagement" asp-controller="ProductManagement" asp-action="Index" class="navbar-item nav-link" aria-content="page" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Product Management">
-                                    <i class="fa fa-pizza-slice"></i>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a asp-area="Sales" asp-controller="Sales" asp-action="Index" class="navbar-item nav-link" aria-content="page" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Sales">
-                                    <i class="fa fa-cash-register"></i>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a asp-area="ClientManagement" asp-controller="ClientManagement" asp-action="Index" class="navbar-item nav-link" aria-content="page" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Client Management">
-                                    <i class="fa fa-user-alt"></i>
-                                </a>
-                            </li>
-                            @if (await _userManager.IsInRoleAsync(currentUser, Role.Superadmin))
-                            {
-                                <li class="nav-item">
-                                    <a asp-area="Settings" asp-controller="Settings" asp-action="Index" class="navbar-item nav-link" aria-content="page" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Settings">
-                                        <i class="fa fa-cog"></i>
-                                    </a>
-                                </li>
-                            }
                         </ul>
                     </div>
                 </div>

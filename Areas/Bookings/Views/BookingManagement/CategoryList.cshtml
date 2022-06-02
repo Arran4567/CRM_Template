@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Bicks.Models.Category>
+
+@{
+    ViewData["Title"] = "Category List";
+    ViewData["Heading"] = "Categories";
+}
+
+@section Toolbar {
+    <li class="nav-item toolbar-item">
+        <a asp-area="ProductManagement" asp-controller="ProductManagement" asp-action="CreateCategory">
+            <i class="fa fa-plus"></i>
+            <p class="">Add Category</p>
+        </a>
+    </li>
+}
+<div class="text-center">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th style="width: 20%" colspan="2">Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <a asp-area="ProductManagement" asp-controller="ProductManagement" asp-action="EditCategory" asp-route-id="@item.ID">
+                        <i class="fa fa-pen"></i>
+                        <p class="">Edit Category</p>
+                    </a>
+                </td>
+                <td>
+                    <a asp-area="ProductManagement" asp-controller="ProductManagement" asp-action="DeleteCategory   " asp-route-id="@item.ID">
+                        <i class="fa fa-trash"></i>
+                        <p class="">Delete Category</p>
+                    </a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

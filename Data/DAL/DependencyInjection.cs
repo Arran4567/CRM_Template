@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Bicks.Areas.Booking.Data.DAL;
 
 namespace Bicks.Data.DAL
 {
@@ -18,6 +19,7 @@ namespace Bicks.Data.DAL
             services.AddTransient<InvoicingWorkUnit>();
             services.AddTransient<ProductManagementWorkUnit>();
             services.AddTransient<SalesWorkUnit>();
+            services.AddTransient<BookingWorkUnit>();
             services.AddTransient<ClientManagementWorkUnit>();
             return services;
         }
