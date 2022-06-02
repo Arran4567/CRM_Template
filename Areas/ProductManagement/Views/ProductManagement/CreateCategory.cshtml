@@ -1,0 +1,44 @@
+﻿@model Bicks.Models.Category
+
+@{
+    ViewData["Title"] = "Create Product";
+    ViewData["Heading"] = "Create Product";
+}
+
+@section Toolbar {
+    <li class="nav-item toolbar-item">
+        <a href="javascript:submitForm()">
+            <i class="fa fa-check"></i>
+            <p class="">Add Category</p>
+        </a>
+    </li>
+    <li class="nav-item toolbar-item">
+        <a asp-area="ProductManagement" asp-controller="ProductManagement" asp-action="CategoryList">
+            <i class="fa fa-times"></i>
+            <p class="">Cancel</p>
+        </a>
+    </li>
+}
+
+@section Scripts {
+    <script type="text/javascript">
+        function submitForm() {
+            $('#create-category-form').submit();
+        }
+    </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" id="create-category-form">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+        </form>
+    </div>
+</div>

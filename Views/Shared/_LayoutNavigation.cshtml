@@ -1,0 +1,104 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Bicks.Entities 
+
+@inject UserManager<ApplicationUser> _userManager
+
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+
+    ApplicationUser currentUser = _userManager.GetUserAsync(User).Result;
+}
+
+<div class="root" id="root">
+    <div class="d-flex" id="wrapper">
+        <!-- Navbar -->
+        <div class="navbar bg-primary" id="navbar-wrapper">
+            <nav class="container-fluid">
+                <div class="text-start">
+                    <button class="navbar-toggler" id="sidebar-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-wrapper" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fa fa-bars navbar-toggler-icon text-white"></i>
+                    </button>
+                    <img src="~/img/logo.png" height="50" style="margin-left: 10px" alt="logo" />
+                </div>
+                <div class="dropdown text-end">
+                    <a href="#" class="dropdown-toggle d-block text-decoration-none text-white" id="userDropDown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-user"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropDown">
+                        <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Logout">Logout</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+        <div class="d-flex" id="outer-content-wrapper">
+            <!-- Sidebar -->
+            <div class="collapse-horizontal collapse show" id="sidebar-wrapper">
+                <div class="navbar">
+                    <div class="navbar-collapse" id="sidebar">
+                        <ul class="navbar-nav flex-column" style="width: 100%">
+                            <li class="nav-item">
+                                <a asp-controller="Home" asp-action="Index" class="navbar-item nav-link" aria-content="page" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Home">
+                                    <i class="fa fa-home"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-area="Invoicing" asp-controller="Invoicing" asp-action="Index" class="navbar-item nav-link" aria-content="page" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Invoicing">
+                                    <i class="fa fa-money-check-alt"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-area="ProductManagement" asp-controller="ProductManagement" asp-action="Index" class="navbar-item nav-link" aria-content="page" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Product Management">
+                                    <i class="fa fa-pizza-slice"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-area="Sales" asp-controller="Sales" asp-action="Index" class="navbar-item nav-link" aria-content="page" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Sales">
+                                    <i class="fa fa-cash-register"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-area="ClientManagement" asp-controller="ClientManagement" asp-action="Index" class="navbar-item nav-link" aria-content="page" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Client Management">
+                                    <i class="fa fa-user-alt"></i>
+                                </a>
+                            </li>
+                            @if (await _userManager.IsInRoleAsync(currentUser, Role.Superadmin))
+                            {
+                                <li class="nav-item">
+                                    <a asp-area="Settings" asp-controller="Settings" asp-action="Index" class="navbar-item nav-link" aria-content="page" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Settings">
+                                        <i class="fa fa-cog"></i>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="" id="content-wrapper">
+                <!-- Toolbar -->
+                @if (IsSectionDefined("Toolbar"))
+                {
+                    <div class="navbar" id="toolbar-wrapper">
+                        <ul class="nav flex-row" id="toolbar">
+                            @*An example Toolbar item
+                                    DON'T ADD THEM HERE, define them in the subview:
+                                    @section Toolbar { #DEFINE HERE# }
+                                <li class="nav-item toolbar-item">
+                                    <a href="#" class="">
+                                        <i class="fa fa-sad-cry"></i>
+                                        <p class="">Text</p>
+                                    </a>
+                                </li>*@
+                            @RenderSection("Toolbar", required: false)
+                        </ul>
+                    </div>
+                }
+                <div class="" id="page-content">
+                    @RenderBody()
+                    @RenderSection("Scripts", required: false)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,112 @@
+﻿@using Bicks.Models
+@model Bicks.Areas.ProductManagement.ViewModels.ProductViewModel
+
+@{
+    ViewData["Title"] = "Create Product";
+    ViewData["Heading"] = "Create Product";
+}
+
+@section Toolbar {
+    <li class="nav-item toolbar-item">
+        <a href="javascript:submitForm()">
+            <i class="fa fa-check"></i>
+            <p class="">Add Product</p>
+        </a>
+    </li>
+    <li class="nav-item toolbar-item">
+        <a asp-area="ProductManagement" asp-controller="ProductManagement" asp-action="ProductList">
+            <i class="fa fa-times"></i>
+            <p class="">Cancel</p>
+        </a>
+    </li>
+}
+
+@section Scripts {
+    <script type="text/javascript">
+        function submitForm() {
+            $('#create-product-form').submit();
+        }
+    </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+<style>
+    #errorBox {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 100;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(196, 196, 196, 0.8);
+        padding: 20px;
+    }
+
+    #errorBox-inner {
+        display: block;
+        position: absolute;
+        margin: 0;
+        top: 40%;
+        left: 50%;
+        -ms-transform: translate(-50%, -40%);
+        transform: translate(-50%, -50%);
+        max-width: 700px;
+        width: 100%;
+        background-color: #FFF;
+        border: solid #000 2px;
+        border-radius: 0.5rem;
+        padding: 1rem;
+    }
+
+    .error-box {
+        width: calc(100% - 6px);
+        background: #e0e0e0;
+        padding: 3px;
+        border-radius: 3px;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, .2);
+        text-align: center;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" id="create-product-form">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Product.ID" />
+            <div class="form-group">
+                <label asp-for="Product.Name" class="control-label"></label>
+                <input asp-for="Product.Name" class="form-control" />
+                <span asp-validation-for="Product.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.PricePerKg" class="control-label"></label>
+                <input asp-for="Product.PricePerKg" class="form-control" />
+                <span asp-validation-for="Product.PricePerKg" class="text-danger"></span>
+            </div>
+            @if (Model.Categories.Count == 0)
+            {
+                <div id="errorBox">
+                    <div id="errorBox-inner" class="error-box">
+                        <div>
+                            <h3>No Categories Found</h3>
+                            <a class="btn" asp-action="CreateCategory">Create Category</a>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="form-group">
+                    <label asp-for="Product.Category" class="control-label"></label>
+                    <select id="CompanyType" asp-for="Product.Category.ID">
+                        @foreach (Category category in Model.Categories)
+                        {
+                            <option value="@category.ID">@category.Name</option>
+                        }
+                    </select>
+                    <span asp-validation-for="Product.Category" class="text-danger"></span>
+                </div>
+            }
+        </form>
+    </div>
+</div>

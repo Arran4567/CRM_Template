@@ -1,0 +1,45 @@
+﻿@{
+    ViewData["Title"] = "Product Management";
+    ViewData["Heading"] = "Product Management";
+}
+<div class="card-grid">
+    <a class="card" asp-area="Sales" asp-controller="Sales" asp-action="CreateSale">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="" class="img-fluid rounded-start" alt="" />
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">Create Sale</h5>
+                    <p class="card-text">Create a new sale</p>
+                </div>
+            </div>
+        </div>
+    </a>
+    <a class="card" asp-area="Sales" asp-controller="Sales" asp-action="EditSale">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="" class="img-fluid rounded-start" alt="" />
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">Edit Sale</h5>
+                    <p class="card-text">Edit an existing sale</p>
+                </div>
+            </div>
+        </div>
+    </a>
+    <a class="card" asp-area="Sales" asp-controller="Sales" asp-action="DeleteSale">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="" class="img-fluid rounded-start" alt="" />
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">Delete Sale</h5>
+                    <p class="card-text">Delete an existing sale</p>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>

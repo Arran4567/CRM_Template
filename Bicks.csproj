@@ -1,0 +1,80 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>aspnet-NestLinkV2-635D7DB2-89D1-45FB-AA67-4C6D8B7C75EB</UserSecretsId>
+    <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Hangfire" Version="1.7.27" />
+    <PackageReference Include="MailKit" Version="2.15.0" />
+    <Compile Remove="Areas\NewFolder\**" />
+    <Content Remove="Areas\NewFolder\**" />
+    <EmbeddedResource Remove="Areas\NewFolder\**" />
+    <None Remove="Areas\NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20211227171703_AddedInvoiceItemsAndSalesToContext.cs" />
+    <Compile Remove="Migrations\20211227171703_AddedInvoiceItemsAndSalesToContext.Designer.cs" />
+    <Compile Remove="Migrations\20211227172155_AddedInvoiceItemsAndSales.cs" />
+    <Compile Remove="Migrations\20211227172155_AddedInvoiceItemsAndSales.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="compilerconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.20" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.21" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.21" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="3.1.21" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.21" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.21">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.20" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+    <PackageReference Include="Rotativa.AspNetCore" Version="1.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\ClientManagement\ViewModels\" />
+    <Folder Include="Areas\ProductManagement\Views\Shared\" />
+    <Folder Include="Areas\Sales\ViewModels\" />
+    <Folder Include="Areas\Settings\Data\" />
+    <Folder Include="Areas\Settings\Models\" />
+    <Folder Include="Library\Web\" />
+    <Folder Include="wwwroot\Invoices\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="compilerconfig.json" />
+    <None Include="wwwroot\Rotativa\wkhtmltoimage.exe" />
+    <None Include="wwwroot\Rotativa\wkhtmltopdf.exe" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\css\bootstrap.custom.scss">
+      <Generator>SassTranspiler</Generator>
+      <LastGenOutput>bootstrap.custom.css</LastGenOutput>
+    </Content>
+    <Content Update="wwwroot\css\site.css">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>site.scss</DependentUpon>
+    </Content>
+    <Content Update="wwwroot\css\site.scss">
+      <Generator>SassTranspiler</Generator>
+      <LastGenOutput>site.css</LastGenOutput>
+    </Content>
+  </ItemGroup>
+
+</Project>

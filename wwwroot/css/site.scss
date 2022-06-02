@@ -1,0 +1,163 @@
+﻿/* Navigation Layour CSS */
+
+@import "bootstrap.custom.scss";
+
+* {
+    box-sizing: border-box;
+}
+
+.root {
+    overflow: hidden;
+    height: 100%;
+}
+
+#wrapper {
+    flex-direction: column;
+}
+
+#navbar-wrapper {
+    height: 66px;
+}
+
+#userDropDown {
+    color: $white;
+}
+
+.navbar-item:hover, .navbar-item:focus {
+    color: $black;
+}
+
+.navbar-item {
+    padding: 0.4rem 0.8rem !important;
+    color: $white;
+    font-size: 15pt;
+    text-align: center;
+}
+
+.btn {
+    background-color: $primary;
+}
+
+.navbar-item:hover, .navbar-item:focus {
+    color: $black;
+}
+
+#outer-content-wrapper {
+    width: 100%;
+    height: calc(100vh - 66px);
+}
+
+#sidebar-wrapper {
+    background-color: darken($primary, 10%);
+}
+
+#content-wrapper {
+    width: 100%;
+}
+
+#toolbar-wrapper {
+    width: 100%;
+    height: 70px;
+    background-color: $gray-300;
+}
+
+.toolbar-item {
+    a {
+        @extend .nav-link;
+
+        svg {
+                font-size: 21px;
+                display: block;
+                margin: auto;
+            }
+        p {
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            font-size: 11px;
+        }
+    }
+
+    a:hover, a:focus {
+        color: $black;
+    }
+}
+
+.bg-primary{
+    background-color: $primary;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+
+#page-content {
+    height: calc(100% - 70px);
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+/*footer {
+    position: absolute;
+    bottom: 0;
+}*/
+
+/* General CSS */
+
+h1 {
+    margin-bottom: 2rem;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 540px);
+    justify-content: space-around;
+    grid-gap: 20px;
+
+    .card {
+        min-height: 138px;
+        width: 540px;
+        text-decoration: none;
+
+        .card-text {
+            color: $black;
+        }
+    }
+}
+
+.table-small-cell {
+    width: 1px;
+    white-space: nowrap;
+}
+
+.data-section {
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+    margin-bottom: 10px;
+
+    .section-header {
+        background-color: $primary;
+        color: $white;
+        font-size: 1rem;
+        font-weight: bold;
+        margin: 0;
+        padding: 1rem 1.25rem;
+        border-top-left-radius: 0.25rem;
+        border-top-right-radius: 0.25rem;
+    }
+
+    .section-body {
+        padding: 1rem 1.25rem;
+    }
+}
+
+/* Technician */
+
+.index-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 18rem);
+    justify-content: space-around;
+    grid-gap: 20px;
+}
+

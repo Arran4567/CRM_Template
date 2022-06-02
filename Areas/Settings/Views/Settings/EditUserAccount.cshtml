@@ -1,0 +1,68 @@
+﻿@model Bicks.Areas.Settings.ViewModels.EditUserAccountViewModel
+@using Microsoft.AspNetCore.Identity
+
+@{
+    ViewData["Title"] = "Settings - User Accounts";
+}
+
+@section Toolbar {
+    <li class="nav-item toolbar-item">
+        <a href="javascript:submitForm()">
+            <i class="fa fa-save"></i>
+            <p class="">Save Changes</p>
+        </a>
+    </li>
+    <li class="nav-item toolbar-item">
+        <a asp-area="Settings" asp-controller="Settings" asp-action="UserAccounts">
+            <i class="fa fa-times"></i>
+            <p class="">Cancel</p>
+        </a>
+    </li>
+}
+
+@section Scripts {
+    <script type="text/javascript">
+        function submitForm() {
+            $('#edit-user-account-form').submit();
+        }
+    </script>
+}
+
+<h1>Edit User Account</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" id="edit-user-account-form">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AccountDisabled"></label>
+                <input asp-for="AccountDisabled" />
+                <span asp-validation-for="AccountDisabled" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserRoles"></label>
+                @{ 
+                    foreach (SelectListItem role in ViewBag.AvailableUserRoles)
+                    {
+                        <div>
+                            <label>
+                                <input type="checkbox" name="UserRoles" id="UserRoles" value="@role.Text" @if (Model.UserRoles.Contains(role.Text)) { <text> checked </text> } />
+                                @role.Text
+                            </label>
+                        </div>
+                    }
+                }
+            </div>
+        </form>
+    </div>
+</div>

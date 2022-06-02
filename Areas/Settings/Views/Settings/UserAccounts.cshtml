@@ -1,0 +1,106 @@
+﻿@model Bicks.Areas.Settings.ViewModels.UserAccountRolesViewModel
+@using Microsoft.AspNetCore.Identity
+
+@{
+    ViewData["Title"] = "Settings - User Accounts";
+}
+
+@section Toolbar {
+    <li class="nav-item toolbar-item">
+        <a asp-area="Settings" asp-controller="Settings" asp-action="CreateUserAccount" >
+            <i class="fa fa-user-plus"></i>
+            <p class="">Add User</p>
+        </a>
+    </li>
+    <li class="nav-item toolbar-item">
+        <a asp-area="Settings" asp-controller="Settings" asp-action="CreateUserRole" >
+            <i class="fa fa-tag"></i>
+            <p class="">Add Role</p>
+        </a>
+    </li>
+}
+
+
+<h1>User Account Settings</h1>
+
+<div class="row">
+    <div class="col-12 col-xl-6">
+        <section class="data-section">
+            <h2 class="section-header">User Accounts</h2>
+            <div class="section-body">
+                @if (Model.Users.Count() == 0)
+                {
+                    <p class="text-center m-0">No Users</p>
+                }
+                else
+                {
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th class="table-small-cell"></th>
+                                <th class="table-small-cell"></th>
+                                <th>User Name</th>
+                                <th>Email</th>
+                                <th>Enabled</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (IdentityUser user in Model.Users)
+                            {
+                                <tr>
+                                    <td>
+                                        <a asp-area="Settings" asp-controller="Settings" asp-action="EditUserAccount" asp-route-id="@user.Id"><i class="fa fa-pen"></i></a>
+                                    </td>
+                                    <td>
+                                        <a asp-area="Settings" asp-controller="Settings" asp-action="DeleteUserAccount" asp-route-id="@user.Id"><i class="fa fa-trash"></i></a>
+                                    </td>
+                                    <td>@user.UserName</td>
+                                    <td>@user.Email</td>
+                                    <td>@(!user.LockoutEnabled)</td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+            </div>
+        </section>
+    </div>
+    <div class="col-12 col-xl-6">
+        <section class="data-section">
+            <h2 class="section-header">User Roles</h2>
+            <div class="section-body">
+                @if (Model.Roles.Count() == 0)
+                {
+                    <p class="text-center m-0">No Roles</p>
+                }
+                else
+                {
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th class="table-small-cell"></th>
+                                <th class="table-small-cell"></th>
+                                <th>Role Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (IdentityRole role in Model.Roles)
+                            {
+                                <tr>
+                                    <td>
+                                        <a asp-area="Settings" asp-controller="Settings" asp-action="EditUserRole" asp-route-id="@role.Id"><i class="fa fa-pen"></i></a>
+                                    </td>
+                                    <td>
+                                        <a asp-area="Settings" asp-controller="Settings" asp-action="DeleteUserRole" asp-route-id="@role.Id"><i class="fa fa-trash"></i></a>
+                                    </td>
+                                    <td>@role.Name</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+            </div>
+        </section>
+    </div>
+</div>

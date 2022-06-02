@@ -1,0 +1,238 @@
+﻿@{ Layout = null; }
+@using Bicks.Models
+@using Bicks.Areas.Invoicing.ViewModels
+@model SalesInvoiceViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Invoice #@Model.InvoiceNo</title>
+
+    <style>
+        .invoice-box {
+            max-width: 800px;
+            margin: auto;
+            padding: 30px;
+            font-size: 16px;
+            line-height: 24px;
+            font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+            color: #555;
+        }
+
+            .invoice-box table {
+                width: 100%;
+                line-height: inherit;
+                text-align: left;
+            }
+
+                .invoice-box table td {
+                    padding: 5px;
+                    vertical-align: top;
+                }
+
+                .invoice-box table tr.top td:nth-child(2) {
+                    text-align: right;
+                }
+
+                .invoice-box table tr.information td:nth-child(2) {
+                    text-align: right;
+                }
+
+                .invoice-box table tr.top table td {
+                    padding-bottom: 20px;
+                }
+
+                    .invoice-box table tr.top table td.title {
+                        font-size: 45px;
+                        line-height: 45px;
+                        color: #333;
+                    }
+
+                .invoice-box table tr.information table td {
+                    padding-bottom: 20px;
+                }
+
+                .invoice-box table tr.subheading td {
+                    background: #eee;
+                    border-top: 1px solid #ddd;
+                    border-bottom: 1px solid #ddd;
+                    margin-top: 20px;
+                    font-weight: bold;
+                }
+
+                .invoice-box table tr.heading td {
+                    font-weight: bold;
+                }
+
+                .invoice-box table tr.item td {
+                    border-bottom: 1px solid #eee;
+                }
+
+                .invoice-box table tr.item.last td {
+                    border-bottom: none;
+                }
+
+                .invoice-box table tr.subtotal td:nth-child(5) {
+                    border-top: 2px solid #eee;
+                }
+
+                .invoice-box table tr.total td:nth-child(5) {
+                    border-top: 2px solid #eee;
+                    font-weight: bold;
+                }
+    </style>
+</head>
+
+<body>
+    <div class="invoice-box">
+        <table cellpadding="0" cellspacing="0">
+            <tr class="top">
+                <td colspan="5">
+                    <table>
+                        <tr>
+                            <td class="title">
+                                <img src="~/img/Invoice-Logo.png" style="height: 100px" />
+                            </td>
+                            <td>
+                                Invoice #: @Model.InvoiceNo.ToString("000000")<br />
+                                Date: @Model.Date.ToString("dd/MM/yy")<br />
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+            <tr class="information">
+                <td colspan="5">
+                    <table>
+                        <tr>
+                            <td>
+                                31 Abenbury Way<br />
+                                Wrexham<br />
+                                LL13 9UZ<br />
+                                Tel:  01978 661336<br />
+                                Email:  bickschicksltd@gmail.com
+                            </td>
+
+                            <td>
+                                Invoice To:<br />
+                                @Model.InvoiceTo
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+            @{
+                List<Category> categories = new List<Category>();
+                foreach (InvoiceItem invoiceItem in Model.InvoiceItems)
+                {
+                    if (!categories.Any(item => item.ID == invoiceItem.Product.Category.ID))
+                    {
+                        categories.Add(invoiceItem.Product.Category);
+                    }
+                }
+                <tr class="heading">
+                    <td>Product</td>
+                    <td>No. of Cases</td>
+                    <td>Total Weight</td>
+                    <td>Price Per Kg (£)</td>
+                    <td>Price (£)</td>
+                </tr>
+                foreach (Category category in categories)
+                {
+                    List<InvoiceItem> catergoryItems = new List<InvoiceItem>();
+                    decimal subtotal = 0.00m;
+                    <tr class="subheading">
+                        <td>@category.Name</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    @foreach (InvoiceItem invoiceItem in Model.InvoiceItems)
+                    {
+                        if (invoiceItem.Product.Category.ID == category.ID)
+                        {
+                            catergoryItems.Add(invoiceItem);
+                            subtotal += invoiceItem.Product.PricePerKg * invoiceItem.TotalWeight;
+                        }
+                    }
+                    foreach (InvoiceItem catergoryItem in catergoryItems)
+                    {
+                        string price = String.Format("{0:.00}", catergoryItem.Product.PricePerKg * catergoryItem.TotalWeight);
+                        if (catergoryItem == catergoryItems.Last())
+                        {
+                            <tr class="item last">
+                                <td>@catergoryItem.Product.Name</td>
+                                <td>@catergoryItem.NumCases</td>
+                                <td>@catergoryItem.TotalWeight</td>
+                                <td>@catergoryItem.Product.PricePerKg</td>
+                                <td>@price</td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr class="item">
+                                <td>@catergoryItem.Product.Name</td>
+                                <td>@catergoryItem.NumCases</td>
+                                <td>@catergoryItem.TotalWeight</td>
+                                <td>@catergoryItem.Product.PricePerKg</td>
+                                <td>@price</td>
+                            </tr>
+                        }
+                    }
+                    <tr class="subtotal">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>@category.Name Total: £@Math.Round(subtotal, 2)</td>
+                    </tr>
+                }
+            }
+
+            <tr class="total">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Invoice Total: £@Math.Round(Model.Total, 2)</td>
+            </tr>
+            <tr class="information">
+                <td colspan="5">
+                    <table>
+                        <tr>
+                            <td>
+                                <strong>Goods Received and Inspected by:</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Signature:</strong>............................................................ <strong>Please Print Name:</strong>............................................................
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr class="information">
+                <td colspan="5">
+                    <table>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <strong>Account Details: </strong>Bicks Chicks Limited<br />
+                                <strong>Bank: </strong>HSBC <strong>Sort Code: </strong>40-47-26<br />
+                                <strong>Account Number: </strong>52294540<br />
+                                <strong>Email: </strong>bickschicksltd@gmail.com<br />
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+</body>
+</html>

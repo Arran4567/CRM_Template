@@ -1,0 +1,114 @@
+﻿@{
+    ViewData["Title"] = "Invoicing";
+    ViewData["Heading"] = "Invoicing";
+}
+
+<style>
+
+    #progressBar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 100;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(196, 196, 196, 0.8);
+        padding: 20px;
+    }
+
+    #progressBar-inner {
+        display: block;
+        position: absolute;
+        margin: 0;
+        top: 40%;
+        left: 50%;
+        -ms-transform: translate(-50%, -40%);
+        transform: translate(-50%, -50%);
+        max-width: 700px;
+        width: 100%;
+        background-color: #FFF;
+        border: solid #000 2px;
+        border-radius: 0.5rem;
+        padding: 1rem;
+    }
+
+    .progress-bar-fill.indeterminate {
+        position: relative;
+        animation: progress-indeterminate 1.5s linear infinite;
+    }
+
+    @@keyframes progress-indeterminate {
+        from {
+            left: 0%;
+            width: 20%;
+        }
+
+        to {
+            left: 80%;
+            width: 20%;
+        }
+    }
+
+    .progress-bar {
+        width: calc(100% - 6px);
+        background: #e0e0e0;
+        padding: 3px;
+        border-radius: 3px;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, .2);
+    }
+
+    .progress-bar-fill {
+        display: block;
+        height: 5px;
+        background: #c7382e;
+        border-radius: 3px;
+        transition: width 250ms ease-in-out;
+    }
+
+    .progress-bar h3 {
+        color: #000000;
+        text-align: center;
+    }
+</style>
+
+<div class="card-grid">
+    <a class="card" onClick="showProgressBar();" asp-area="Invoicing" asp-controller="Invoicing" asp-action="CreateInvoice">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="" class="img-fluid rounded-start" alt="" />
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">Create Invoice</h5>
+                    <p class="card-text">Create a new Invoice</p>
+                </div>
+            </div>
+        </div>
+    </a>
+    <a class="card" href="~/Invoices/075741.pdf" target="_blank">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="" class="img-fluid rounded-start" alt="" />
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">View Invoice</h5>
+                    <p class="card-text">View an Invoice</p>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+<div id="progressBar" style="display: none;">
+    <div id="progressBar-inner" class="progress-bar">
+        <div>
+            <h3>Creating Invoice</h3>
+            <span class="progress-bar-fill indeterminate"></span>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function showProgressBar() {
+        $('#progressBar').show();
+    }
+</script>

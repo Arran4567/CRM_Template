@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Bicks.Models.Client>
+
+@{
+    ViewData["Title"] = "Client List";
+    ViewData["Heading"] = "Clients";
+}
+
+@section Toolbar {
+    <li class="nav-item toolbar-item">
+        <a asp-area="ClientManagement" asp-controller="ClientManagement" asp-action="CreateClient">
+            <i class="fa fa-plus"></i>
+            <p class="">Add Client</p>
+        </a>
+    </li>
+}
+
+<div class="text-center">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AddressLine1)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ContactEmail)
+                </th>
+                <th style="width: 20%" colspan="2">Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AddressLine1)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ContactEmail)
+                    </td>
+                    <td>
+                        <a asp-area="ClientManagement" asp-controller="ClientManagement" asp-action="EditClient" asp-route-id="@item.ID">
+                            <i class="fa fa-pen"></i>
+                            <p class="">Edit Client</p>
+                        </a>
+                    </td>
+                    <td>
+                        <a asp-area="ClientManagement" asp-controller="ClientManagement" asp-action="DeleteClient" asp-route-id="@item.ID">
+                            <i class="fa fa-trash"></i>
+                            <p class="">Delete Client</p>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

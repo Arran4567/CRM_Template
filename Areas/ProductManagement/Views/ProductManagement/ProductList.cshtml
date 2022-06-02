@@ -1,0 +1,61 @@
+﻿@{
+    ViewData["Title"] = "Product List";
+    ViewData["Heading"] = "Products";
+}
+@model IEnumerable<Bicks.Models.Product>
+
+@section Toolbar {
+    <li class="nav-item toolbar-item">
+        <a asp-area="ProductManagement" asp-controller="ProductManagement" asp-action="CreateProduct">
+            <i class="fa fa-plus"></i>
+            <p class="">Add Product</p>
+        </a>
+    </li>
+}
+
+<div class="text-center">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Category)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PricePerKg)
+                </th>
+                <th style="width: 20%" colspan="2">Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PricePerKg)
+                    </td>
+                    <td>
+                        <a asp-area="ProductManagement" asp-controller="ProductManagement" asp-action="EditProduct" asp-route-id="@item.ID">
+                            <i class="fa fa-pen"></i>
+                            <p class="">Edit Product</p>
+                        </a>
+                    </td>
+                    <td>
+                        <a asp-area="ProductManagement" asp-controller="ProductManagement" asp-action="DeleteProduct" asp-route-id="@item.ID">
+                            <i class="fa fa-trash"></i>
+                            <p class="">Delete Product</p>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
